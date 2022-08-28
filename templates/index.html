@@ -1,0 +1,44 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Color Extractor{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1>Extractor</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                {{ form.image }}
+                <input type="submit" value="extract">
+            </form>
+
+        {% if colors %}
+            <div>
+                <h3>Extracted Colors</h3>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Color</th>
+                      <th scope="col">Hex Code</th>
+                    </tr>
+                  </thead>
+                    {% for hex_code in colors %}
+
+                      <tbody>
+                        <tr>
+                          <td style="background-color: {{ hex_code }}"></td>
+                          <td>{{ hex_code }}</td>
+                        </tr>
+                      </tbody>
+
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
